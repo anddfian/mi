@@ -10,8 +10,11 @@ def CaesarCipherEncrypt():
     print("=====================================")
     print("|      Caesar Cipher - Enkripsi     |")
     print("=====================================")
-    plaintext = str(input("Plainteks: "))
-    s = int(input("Shift: "))
+    try:
+        plaintext = str(input("Plainteks: "))
+        s = int(input("Shift: "))
+    except(KeyboardInterrupt):
+        back_to_menu()
     ciphertext = ""
     for i in range(len(plaintext)):
         if (plaintext[i].isupper()):
@@ -27,8 +30,11 @@ def CaesarCipherDecrypt():
     print("=====================================")
     print("|      Caesar Cipher - Dekripsi     |")
     print("=====================================")
-    ciphertext = str(input("Cipherteks: "))
-    s = int(input("Shift: "))
+    try:
+        ciphertext = str(input("Cipherteks: "))
+        s = int(input("Shift: "))
+    except(KeyboardInterrupt):
+        back_to_menu()
     plaintext = ""
     for i in range(len(ciphertext)):
         if (ciphertext[i].isupper()):
@@ -53,8 +59,11 @@ def VigènereCipherEncrypt():
     print("=====================================")
     print("|     Vigènere Cipher - Enkripsi    |")
     print("=====================================")
-    plaintext = str(input("Plainteks: "))
-    kunci = str(input("Kunci: "))
+    try:
+        plaintext = str(input("Plainteks: "))
+        kunci = str(input("Kunci: "))
+    except(KeyboardInterrupt):
+        back_to_menu()
     key = generateKey(plaintext, kunci)
     ciphertext = []
     for i in range(len(plaintext)):
@@ -74,8 +83,11 @@ def VigènereCipherDecrypt():
     print("=====================================")
     print("|     Vigènere Cipher - Dekripsi    |")
     print("=====================================")
-    ciphertext = str(input("Cipherteks: "))
-    kunci = str(input("Kunci: "))
+    try:
+        ciphertext = str(input("Cipherteks: "))
+        kunci = str(input("Kunci: "))
+    except(KeyboardInterrupt):
+        back_to_menu()
     key = generateKey(ciphertext, kunci)
     plaintext = []
     for i in range(len(ciphertext)):
