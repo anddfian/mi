@@ -86,18 +86,18 @@ def VigènereCipherEncrypt():
             ciphertext += " "
         else:
             if(plaintext[i].isupper() and key[i].isupper()):
-                x = (ord(plaintext[i]) + ord(key[i])) % 26 #(P + K) mod 26
-                x += ord('A') #Angka di mulai dari ord A seterusnya
+                x = (ord(plaintext[i]) + ord(key[i])) % 26
+                x += ord('A')
             elif(plaintext[i].isupper() and key[i].islower()):
-                x = (ord(plaintext[i]) + (ord(key[i]) - 32)) % 26 #(P + K) mod 26
-                x += ord('A') #Angka di mulai dari ord A seterusnya
+                x = (ord(plaintext[i]) + (ord(key[i]) - 32)) % 26
+                x += ord('A')
             elif(plaintext[i].islower() and key[i].isupper()):
-                x = ((ord(plaintext[i]) - 32) + ord(key[i])) % 26 #(P + K) mod 26
-                x += ord('a') #Angka di mulai dari ord a seterusnya
+                x = ((ord(plaintext[i]) - 32) + ord(key[i])) % 26
+                x += ord('a')
             else:
-                x = ((ord(plaintext[i]) - 32) + (ord(key[i]) - 32)) % 26 #(P + K) mod 26
-                x += ord('a') #Angka di mulai dari ord a seterusnya
-            ciphertext += chr(x) #hasil x di masukkan ke dalam list orig text
+                x = ((ord(plaintext[i]) - 32) + (ord(key[i]) - 32)) % 26
+                x += ord('a')
+            ciphertext += chr(x)
     print("Cipherteks: " + ciphertext)
     create_history(3, 0, kunci, plaintext, ciphertext)
     back_to_menu()
@@ -120,18 +120,18 @@ def VigènereCipherDecrypt():
             plaintext += " "
         else:
             if(ciphertext[i].isupper() and key[i].isupper()):
-                x = (ord(ciphertext[i]) - ord(key[i]) + 26) % 26 #((P - K) + 26) mod 26
-                x += ord('A') #Angka di mulai dari ord A seterusnya
+                x = (ord(ciphertext[i]) - ord(key[i]) + 26) % 26
+                x += ord('A')
             elif(ciphertext[i].isupper() and key[i].islower()):
-                x = (ord(ciphertext[i]) - (ord(key[i]) - 32) + 26) % 26 #((P - K) + 26) mod 26
-                x += ord('A') #Angka di mulai dari ord A seterusnya
+                x = (ord(ciphertext[i]) - (ord(key[i]) - 32) + 26) % 26
+                x += ord('A')
             elif(ciphertext[i].islower() and key[i].isupper()):
-                x = ((ord(ciphertext[i]) - 32) - ord(key[i]) + 26) % 26 #((P - K) + 26) mod 26
-                x += ord('a') #Angka di mulai dari ord a seterusnya
+                x = ((ord(ciphertext[i]) - 32) - ord(key[i]) + 26) % 26
+                x += ord('a')
             else:
-                x = ((ord(ciphertext[i]) - 32) - (ord(key[i]) - 32) + 26) % 26 #((P - K) + 26) mod 26
-                x += ord('a') #Angka di mulai dari ord a seterusnya
-            plaintext += chr(x) #hasil x di masukkan ke dalam list orig text
+                x = ((ord(ciphertext[i]) - 32) - (ord(key[i]) - 32) + 26) % 26
+                x += ord('a')
+            plaintext += chr(x)
     print("Plainteks: " + plaintext)
     create_history(4, 0, kunci, plaintext, ciphertext)
     back_to_menu()
