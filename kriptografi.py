@@ -132,12 +132,12 @@ def VigènereCipherDecrypt():
     create_history(4, 0, kunci, plaintext, ciphertext)
     back_to_menu()
 
-def create_history(tipe, s, kunci, plaintext, ciphertext):
+def create_history(tipe, shift, kunci, plaintext, ciphertext):
     file_history_in = open(txt_filename_history, "w")
     if(tipe == 1):
-        file_history_in.write("Jenis      : Casesar Cipher (Enkripsi)\nBergeser   : %d\nPlainteks  : %s\nCipherteks : %s" % (s, plaintext, ciphertext))
+        file_history_in.write("Jenis      : Casesar Cipher (Enkripsi)\nBergeser   : %d\nPlainteks  : %s\nCipherteks : %s" % (shift, plaintext, ciphertext))
     elif(tipe == 2):
-        file_history_in.write("Jenis      : Casesar Cipher (Dekripsi)\nBergeser   : %d\nCipherteks : %s\nPlainteks  : %s" % (s, ciphertext, plaintext))
+        file_history_in.write("Jenis      : Casesar Cipher (Dekripsi)\nBergeser   : %d\nCipherteks : %s\nPlainteks  : %s" % (shift, ciphertext, plaintext))
     elif(tipe == 3):
         file_history_in.write("Jenis      : Vigènere Cipher (Enkripsi)\nKunci      : %s\nPlainteks  : %s\nCipherteks : %s" % (kunci, plaintext, ciphertext))
     elif(tipe == 4):
@@ -180,18 +180,19 @@ def show_menu():
     print("| [0] Exit                          |")
     print("=====================================")
     try:
-        selected_menu = str(input("Pilih menu> "))
-        if(selected_menu == "1"):
-            CaesarCipherEncrypt()
-        elif(selected_menu == "2"):
-            CaesarCipherDecrypt()
-        elif(selected_menu == "3"):
-            VigènereCipherEncrypt()
-        elif(selected_menu == "4"):
-            VigènereCipherDecrypt()
-        elif(selected_menu == "0"):
-            exit()
-        else:
+        try:
+            selected_menu = int(input("Pilih menu> "))
+            if(selected_menu == 1):
+                CaesarCipherEncrypt()
+            elif(selected_menu == 2):
+                CaesarCipherDecrypt()
+            elif(selected_menu == 3):
+                VigènereCipherEncrypt()
+            elif(selected_menu == 4):
+                VigènereCipherDecrypt()
+            elif(selected_menu == 0):
+                exit()
+        except(ValueError):
             print("Kamu memilih menu yang salah!")
             back_to_menu()
     except(KeyboardInterrupt):
