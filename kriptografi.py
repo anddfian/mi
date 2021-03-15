@@ -13,7 +13,12 @@ def CaesarCipherEncrypt():
     show_history()
     try:
         plaintext = str(input("Plainteks  : "))
-        shift = int(input("Bergeser   : "))
+        try:
+            shift = int(input("Bergeser   : "))
+        except(ValueError):
+            print("Hanya boleh masukkan angka!")
+            input("Tekan 'Enter' untuk melanjutkan...")
+            CaesarCipherEncrypt()
     except(KeyboardInterrupt):
         back_to_menu()
     ciphertext = ""
@@ -36,7 +41,12 @@ def CaesarCipherDecrypt():
     show_history()
     try:
         ciphertext = str(input("Cipherteks : "))
-        shift = int(input("Bergeser   : "))
+        try:
+            shift = int(input("Bergeser   : "))
+        except(ValueError):
+            print("Hanya boleh masukkan angka!")
+            input("Tekan 'Enter' untuk melanjutkan...")
+            CaesarCipherDecrypt()
     except(KeyboardInterrupt):
         back_to_menu()
     plaintext = ""
