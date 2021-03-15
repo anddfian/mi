@@ -12,8 +12,8 @@ def CaesarCipherEncrypt():
     print("=====================================")
     show_history()
     try:
-        plaintext = str(input("Plainteks: "))
-        shift = int(input("Bergeser: "))
+        plaintext = str(input("Plainteks  : "))
+        shift = int(input("Bergeser   : "))
     except(KeyboardInterrupt):
         back_to_menu()
     ciphertext = ""
@@ -24,7 +24,7 @@ def CaesarCipherEncrypt():
             ciphertext += chr((ord(plaintext[i]) + shift - 65) % 26 + 65)
         else:
             ciphertext += chr((ord(plaintext[i]) + shift - 97) % 26 + 97)
-    print("Cipherteks: " + ciphertext)
+    print("Cipherteks : " + ciphertext)
     create_history(1, shift, 0, plaintext, ciphertext)
     back_to_menu()
 
@@ -35,8 +35,8 @@ def CaesarCipherDecrypt():
     print("=====================================")
     show_history()
     try:
-        ciphertext = str(input("Cipherteks: "))
-        shift = int(input("Bergeser: "))
+        ciphertext = str(input("Cipherteks : "))
+        shift = int(input("Bergeser   : "))
     except(KeyboardInterrupt):
         back_to_menu()
     plaintext = ""
@@ -47,18 +47,12 @@ def CaesarCipherDecrypt():
             plaintext += chr((ord(ciphertext[i]) + -shift - 65) % 26 + 65)
         else:
             plaintext += chr((ord(ciphertext[i]) + -shift - 97) % 26 + 97)
-    print("Plainteks: " + plaintext)
+    print("Plainteks  : " + plaintext)
     create_history(2, shift, 0, plaintext, ciphertext)
     back_to_menu()
 
 def generateKey(string, key):
     new_key = ""
-    n = len(string)
-    for i in range(len(string)):
-        if(string[i].isspace()):
-            n -= 1
-    if n == len(key):
-        return key
     j = 0
     for i in range(len(string)):
         if(string[i].isspace()):
@@ -75,8 +69,8 @@ def VigènereCipherEncrypt():
     print("=====================================")
     show_history()
     try:
-        plaintext = str(input("Plainteks: "))
-        kunci = str(input("Kunci: "))
+        plaintext = str(input("Plainteks  : "))
+        kunci = str(input("Kunci      : "))
     except(KeyboardInterrupt):
         back_to_menu()
     ciphertext = ""
@@ -86,19 +80,15 @@ def VigènereCipherEncrypt():
             ciphertext += " "
         else:
             if(plaintext[i].isupper() and key[i].isupper()):
-                x = (ord(plaintext[i]) + ord(key[i])) % 26
-                x += ord('A')
+                x = (ord(plaintext[i]) + ord(key[i])) % 26 + 65
             elif(plaintext[i].isupper() and key[i].islower()):
-                x = (ord(plaintext[i]) + (ord(key[i]) - 32)) % 26
-                x += ord('A')
+                x = (ord(plaintext[i]) + (ord(key[i]) - 32)) % 26 + 65
             elif(plaintext[i].islower() and key[i].isupper()):
-                x = ((ord(plaintext[i]) - 32) + ord(key[i])) % 26
-                x += ord('a')
+                x = ((ord(plaintext[i]) - 32) + ord(key[i])) % 26 + 97
             else:
-                x = ((ord(plaintext[i]) - 32) + (ord(key[i]) - 32)) % 26
-                x += ord('a')
+                x = ((ord(plaintext[i]) - 32) + (ord(key[i]) - 32)) % 26 + 97
             ciphertext += chr(x)
-    print("Cipherteks: " + ciphertext)
+    print("Cipherteks : " + ciphertext)
     create_history(3, 0, kunci, plaintext, ciphertext)
     back_to_menu()
 
@@ -109,8 +99,8 @@ def VigènereCipherDecrypt():
     print("=====================================")
     show_history()
     try:
-        ciphertext = str(input("Cipherteks: "))
-        kunci = str(input("Kunci: "))
+        ciphertext = str(input("Cipherteks : "))
+        kunci = str(input("Kunci      : "))
     except(KeyboardInterrupt):
         back_to_menu()
     plaintext = ""
@@ -120,39 +110,35 @@ def VigènereCipherDecrypt():
             plaintext += " "
         else:
             if(ciphertext[i].isupper() and key[i].isupper()):
-                x = (ord(ciphertext[i]) - ord(key[i]) + 26) % 26
-                x += ord('A')
+                x = (ord(ciphertext[i]) - ord(key[i]) + 26) % 26 + 65
             elif(ciphertext[i].isupper() and key[i].islower()):
-                x = (ord(ciphertext[i]) - (ord(key[i]) - 32) + 26) % 26
-                x += ord('A')
+                x = (ord(ciphertext[i]) - (ord(key[i]) - 32) + 26) % 26 + 65
             elif(ciphertext[i].islower() and key[i].isupper()):
-                x = ((ord(ciphertext[i]) - 32) - ord(key[i]) + 26) % 26
-                x += ord('a')
+                x = ((ord(ciphertext[i]) - 32) - ord(key[i]) + 26) % 26 + 97
             else:
-                x = ((ord(ciphertext[i]) - 32) - (ord(key[i]) - 32) + 26) % 26
-                x += ord('a')
+                x = ((ord(ciphertext[i]) - 32) - (ord(key[i]) - 32) + 26) % 26 + 97
             plaintext += chr(x)
-    print("Plainteks: " + plaintext)
+    print("Plainteks  : " + plaintext)
     create_history(4, 0, kunci, plaintext, ciphertext)
     back_to_menu()
 
 def create_history(tipe, s, kunci, plaintext, ciphertext):
     file_history_in = open(txt_filename_history, "w")
     if(tipe == 1):
-        file_history_in.write("Casesar Cipher (Enkripsi)\nShift: %d\nPlainteks: %s\nCipherteks: %s" % (s, plaintext, ciphertext))
+        file_history_in.write("Jenis      : Casesar Cipher (Enkripsi)\nBergeser   : %d\nPlainteks  : %s\nCipherteks : %s" % (s, plaintext, ciphertext))
     elif(tipe == 2):
-        file_history_in.write("Casesar Cipher (Dekripsi)\nShift: %d\nCipherteks: %s\nPlainteks: %s" % (s, ciphertext, plaintext))
+        file_history_in.write("Jenis      : Casesar Cipher (Dekripsi)\nBergeser   : %d\nCipherteks : %s\nPlainteks  : %s" % (s, ciphertext, plaintext))
     elif(tipe == 3):
-        file_history_in.write("Vigènere Cipher (Enkripsi)\nKunci: %s\nPlainteks: %s\nCipherteks: %s" % (kunci, plaintext, ciphertext))
+        file_history_in.write("Jenis      : Vigènere Cipher (Enkripsi)\nKunci      : %s\nPlainteks  : %s\nCipherteks : %s" % (kunci, plaintext, ciphertext))
     elif(tipe == 4):
-        file_history_in.write("Vigènere Cipher (Dekripsi)\nKunci: %s\nCipherteks: %s\nPlainteks: %s" % (kunci, ciphertext, plaintext))
+        file_history_in.write("Jenis      : Vigènere Cipher (Dekripsi)\nKunci      : %s\nCipherteks : %s\nPlainteks  : %s" % (kunci, ciphertext, plaintext))
     file_history_in.close()
 
 def show_history():
     file_history_in = open(txt_filename_history, "r")
     history = file_history_in.read()
     if(len(history) > 0):
-        print("Riwayat sebelumnya: " + history)
+        print("Riwayat sebelumnya\n" + history)
         print("=====================================")
     file_history_in.close()
 
