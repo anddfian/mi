@@ -135,6 +135,10 @@ def create_history(tipe, s, kunci, plaintext, ciphertext):
     file_history_in.close()
 
 def show_history():
+    if not os.path.exists(txt_filename_history):
+        with open(txt_filename_history, 'w'):
+            file_detekesi = open(txt_filename_history, "w")
+            file_detekesi.close()
     file_history_in = open(txt_filename_history, "r")
     history = file_history_in.read()
     if(len(history) > 0):
@@ -165,20 +169,23 @@ def show_menu():
     print("| [4] Vigènere Cipher - Dekripsi    |")
     print("| [0] Exit                          |")
     print("=====================================")
-    selected_menu = str(input("Pilih menu> "))
-    if(selected_menu == "1"):
-        CaesarCipherEncrypt()
-    elif(selected_menu == "2"):
-        CaesarCipherDecrypt()
-    elif(selected_menu == "3"):
-        VigènereCipherEncrypt()
-    elif(selected_menu == "4"):
-        VigènereCipherDecrypt()
-    elif(selected_menu == "0"):
+    try:
+        selected_menu = str(input("Pilih menu> "))
+        if(selected_menu == "1"):
+            CaesarCipherEncrypt()
+        elif(selected_menu == "2"):
+            CaesarCipherDecrypt()
+        elif(selected_menu == "3"):
+            VigènereCipherEncrypt()
+        elif(selected_menu == "4"):
+            VigènereCipherDecrypt()
+        elif(selected_menu == "0"):
+            exit()
+        else:
+            print("Kamu memilih menu yang salah!")
+            back_to_menu()
+    except(KeyboardInterrupt):
         exit()
-    else:
-        print("Kamu memilih menu yang salah!")
-        back_to_menu()
 
 if __name__ == "__main__":
     show_menu()
