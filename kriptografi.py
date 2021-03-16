@@ -15,6 +15,10 @@ def CaesarCipherEncrypt():
         plaintext = str(input("Plainteks  : "))
         try:
             shift = int(input("Bergeser   : "))
+            if(shift < 0):
+                print("Hanya boleh masukkan angka positif!")
+                input("Tekan 'Enter' untuk melanjutkan...")
+                CaesarCipherEncrypt()
         except(ValueError):
             print("Hanya boleh masukkan angka!")
             input("Tekan 'Enter' untuk melanjutkan...")
@@ -43,6 +47,10 @@ def CaesarCipherDecrypt():
         ciphertext = str(input("Cipherteks : "))
         try:
             shift = int(input("Bergeser   : "))
+            if(shift < 0):
+                print("Hanya boleh masukkan angka positif!")
+                input("Tekan 'Enter' untuk melanjutkan...")
+                CaesarCipherDecrypt()
         except(ValueError):
             print("Hanya boleh masukkan angka!")
             input("Tekan 'Enter' untuk melanjutkan...")
@@ -54,9 +62,9 @@ def CaesarCipherDecrypt():
         if(ciphertext[i].isspace()):
             plaintext += " "
         elif(ciphertext[i].isupper()):
-            plaintext += chr((ord(ciphertext[i]) + -shift - 65) % 26 + 65)
+            plaintext += chr((ord(ciphertext[i]) + -shift - 65) % 26 + 65) # A = 65
         else:
-            plaintext += chr((ord(ciphertext[i]) + -shift - 97) % 26 + 97)
+            plaintext += chr((ord(ciphertext[i]) + -shift - 97) % 26 + 97) # a = 97
     print("Plainteks  : " + plaintext)
     create_history(2, shift, 0, plaintext, ciphertext)
     back_to_menu()
