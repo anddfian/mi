@@ -62,9 +62,9 @@ def CaesarCipherDecrypt():
         if(ciphertext[i].isspace()):
             plaintext += " "
         elif(ciphertext[i].isupper()):
-            plaintext += chr((ord(ciphertext[i]) + -shift - 65) % 26 + 65) # A = 65
+            plaintext += chr((ord(ciphertext[i]) + -shift - 65) % 26 + 65)
         else:
-            plaintext += chr((ord(ciphertext[i]) + -shift - 97) % 26 + 97) # a = 97
+            plaintext += chr((ord(ciphertext[i]) + -shift - 97) % 26 + 97)
     print("Plainteks  : " + plaintext)
     create_history(2, shift, 0, plaintext, ciphertext)
     back_to_menu()
@@ -143,13 +143,13 @@ def VigènereCipherDecrypt():
 def create_history(tipe, shift, kunci, plaintext, ciphertext):
     file_history_in = open(txt_filename_history, "w")
     if(tipe == 1):
-        file_history_in.write("Jenis      : Casesar Cipher (Enkripsi)\nBergeser   : %d\nPlainteks  : %s\nCipherteks : %s" % (shift, plaintext, ciphertext))
+        file_history_in.write("Jenis      : Casesar Cipher (Enkripsi)\nPlainteks  : %s\nBergeser   : %d\nCipherteks : %s" % (plaintext, shift, ciphertext))
     elif(tipe == 2):
-        file_history_in.write("Jenis      : Casesar Cipher (Dekripsi)\nBergeser   : %d\nCipherteks : %s\nPlainteks  : %s" % (shift, ciphertext, plaintext))
+        file_history_in.write("Jenis      : Casesar Cipher (Dekripsi)\nCipherteks : %s\nBergeser   : %d\nPlainteks  : %s" % (ciphertext, shift, plaintext))
     elif(tipe == 3):
-        file_history_in.write("Jenis      : Vigènere Cipher (Enkripsi)\nKunci      : %s\nPlainteks  : %s\nCipherteks : %s" % (kunci, plaintext, ciphertext))
+        file_history_in.write("Jenis      : Vigènere Cipher (Enkripsi)\nPlainteks  : %s\nKunci      : %s\nCipherteks : %s" % (plaintext, kunci, ciphertext))
     elif(tipe == 4):
-        file_history_in.write("Jenis      : Vigènere Cipher (Dekripsi)\nKunci      : %s\nCipherteks : %s\nPlainteks  : %s" % (kunci, ciphertext, plaintext))
+        file_history_in.write("Jenis      : Vigènere Cipher (Dekripsi)\nCipherteks : %s\nKunci      : %s\nPlainteks  : %s" % (ciphertext, kunci, plaintext))
     file_history_in.close()
 
 def show_history():
@@ -165,8 +165,11 @@ def show_history():
     file_history_in.close()
 
 def back_to_menu():
-    input("\nTekan 'Enter' untuk kembali...")
-    show_menu()
+    try:
+        input("\nTekan 'Enter' untuk kembali...")
+        show_menu()
+    except(KeyboardInterrupt):
+        show_menu()
 
 def show_menu():
     clear_screen()
