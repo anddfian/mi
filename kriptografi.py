@@ -203,6 +203,9 @@ def show_menu():
                 VigènereCipherDecrypt()
             elif(selected_menu == 0):
                 exit()
+            else:
+                print("Kamu memilih menu yang salah!")
+                back_to_menu()
         except(ValueError):
             print("Kamu memilih menu yang salah!")
             back_to_menu()
