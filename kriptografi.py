@@ -15,21 +15,21 @@ def CaesarCipherEncrypt():
         plaintext = str(input("Plainteks  : "))
         try:
             shift = int(input("Bergeser   : "))
-            if(shift < 0):
+            if shift < 0:
                 print("Hanya boleh masukkan angka positif!")
                 input("Tekan 'Enter' untuk melanjutkan...")
                 CaesarCipherEncrypt()
-        except(ValueError):
+        except ValueError:
             print("Hanya boleh masukkan angka!")
             input("Tekan 'Enter' untuk melanjutkan...")
             CaesarCipherEncrypt()
-    except(KeyboardInterrupt):
+    except KeyboardInterrupt:
         back_to_menu()
     ciphertext = ""
     for i in range(len(plaintext)):
-        if(plaintext[i].isspace()):
+        if plaintext[i].isspace():
             ciphertext += " "
-        elif(plaintext[i].isupper()):
+        elif plaintext[i].isupper():
             ciphertext += chr((ord(plaintext[i]) + shift - 65) % 26 + 65)
         else:
             ciphertext += chr((ord(plaintext[i]) + shift - 97) % 26 + 97)
@@ -47,21 +47,21 @@ def CaesarCipherDecrypt():
         ciphertext = str(input("Cipherteks : "))
         try:
             shift = int(input("Bergeser   : "))
-            if(shift < 0):
+            if shift < 0:
                 print("Hanya boleh masukkan angka positif!")
                 input("Tekan 'Enter' untuk melanjutkan...")
                 CaesarCipherDecrypt()
-        except(ValueError):
+        except ValueError:
             print("Hanya boleh masukkan angka!")
             input("Tekan 'Enter' untuk melanjutkan...")
             CaesarCipherDecrypt()
-    except(KeyboardInterrupt):
+    except KeyboardInterrupt:
         back_to_menu()
     plaintext = ""
     for i in range(len(ciphertext)):
-        if(ciphertext[i].isspace()):
+        if ciphertext[i].isspace():
             plaintext += " "
-        elif(ciphertext[i].isupper()):
+        elif ciphertext[i].isupper():
             plaintext += chr((ord(ciphertext[i]) + -shift - 65) % 26 + 65)
         else:
             plaintext += chr((ord(ciphertext[i]) + -shift - 97) % 26 + 97)
@@ -73,7 +73,7 @@ def generateKey(string, key):
     new_key = ""
     j = 0
     for i in range(len(string)):
-        if(string[i].isspace()):
+        if string[i].isspace():
             new_key += " "
         else:
             new_key += key[j % len(key)]
@@ -89,19 +89,19 @@ def VigènereCipherEncrypt():
     try:
         plaintext = str(input("Plainteks  : "))
         kunci = str(input("Kunci      : "))
-    except(KeyboardInterrupt):
+    except KeyboardInterrupt:
         back_to_menu()
     ciphertext = ""
     key = generateKey(plaintext, kunci)
     for i in range(len(plaintext)):
-        if(plaintext[i].isspace()):
+        if plaintext[i].isspace():
             ciphertext += " "
         else:
-            if(plaintext[i].isupper() and key[i].isupper()):
+            if plaintext[i].isupper() and key[i].isupper():
                 x = (ord(plaintext[i]) + ord(key[i])) % 26 + 65
-            elif(plaintext[i].isupper() and key[i].islower()):
+            elif plaintext[i].isupper() and key[i].islower():
                 x = (ord(plaintext[i]) + (ord(key[i]) - 32)) % 26 + 65
-            elif(plaintext[i].islower() and key[i].isupper()):
+            elif plaintext[i].islower() and key[i].isupper():
                 x = ((ord(plaintext[i]) - 32) + ord(key[i])) % 26 + 97
             else:
                 x = ((ord(plaintext[i]) - 32) + (ord(key[i]) - 32)) % 26 + 97
@@ -119,19 +119,19 @@ def VigènereCipherDecrypt():
     try:
         ciphertext = str(input("Cipherteks : "))
         kunci = str(input("Kunci      : "))
-    except(KeyboardInterrupt):
+    except KeyboardInterrupt:
         back_to_menu()
     plaintext = ""
     key = generateKey(ciphertext, kunci)
     for i in range(len(ciphertext)):
-        if(ciphertext[i].isspace()):
+        if ciphertext[i].isspace():
             plaintext += " "
         else:
-            if(ciphertext[i].isupper() and key[i].isupper()):
+            if ciphertext[i].isupper() and key[i].isupper():
                 x = (ord(ciphertext[i]) - ord(key[i]) + 26) % 26 + 65
-            elif(ciphertext[i].isupper() and key[i].islower()):
+            elif ciphertext[i].isupper() and key[i].islower():
                 x = (ord(ciphertext[i]) - (ord(key[i]) - 32) + 26) % 26 + 65
-            elif(ciphertext[i].islower() and key[i].isupper()):
+            elif ciphertext[i].islower() and key[i].isupper():
                 x = ((ord(ciphertext[i]) - 32) - ord(key[i]) + 26) % 26 + 97
             else:
                 x = ((ord(ciphertext[i]) - 32) - (ord(key[i]) - 32) + 26) % 26 + 97
@@ -142,13 +142,13 @@ def VigènereCipherDecrypt():
 
 def create_history(tipe, shift, kunci, plaintext, ciphertext):
     file_history_in = open(txt_filename_history, "w")
-    if(tipe == 1):
+    if tipe == 1:
         file_history_in.write("Jenis      : Casesar Cipher (Enkripsi)\nPlainteks  : %s\nBergeser   : %d\nCipherteks : %s" % (plaintext, shift, ciphertext))
-    elif(tipe == 2):
+    elif tipe == 2:
         file_history_in.write("Jenis      : Casesar Cipher (Dekripsi)\nCipherteks : %s\nBergeser   : %d\nPlainteks  : %s" % (ciphertext, shift, plaintext))
-    elif(tipe == 3):
+    elif tipe == 3:
         file_history_in.write("Jenis      : Vigènere Cipher (Enkripsi)\nPlainteks  : %s\nKunci      : %s\nCipherteks : %s" % (plaintext, kunci, ciphertext))
-    elif(tipe == 4):
+    elif tipe == 4:
         file_history_in.write("Jenis      : Vigènere Cipher (Dekripsi)\nCipherteks : %s\nKunci      : %s\nPlainteks  : %s" % (ciphertext, kunci, plaintext))
     file_history_in.close()
 
@@ -159,7 +159,7 @@ def show_history():
             file_detekesi.close()
     file_history_in = open(txt_filename_history, "r")
     history = file_history_in.read()
-    if(len(history) > 0):
+    if len(history) > 0:
         print("Riwayat sebelumnya\n" + history)
         print("=====================================")
     file_history_in.close()
@@ -168,7 +168,7 @@ def back_to_menu():
     try:
         input("\nTekan 'Enter' untuk kembali...")
         show_menu()
-    except(KeyboardInterrupt):
+    except KeyboardInterrupt:
         show_menu()
 
 def show_menu():
@@ -193,23 +193,23 @@ def show_menu():
     try:
         try:
             selected_menu = int(input("Pilih menu> "))
-            if(selected_menu == 1):
+            if selected_menu == 1:
                 CaesarCipherEncrypt()
-            elif(selected_menu == 2):
+            elif selected_menu == 2:
                 CaesarCipherDecrypt()
-            elif(selected_menu == 3):
+            elif selected_menu == 3:
                 VigènereCipherEncrypt()
-            elif(selected_menu == 4):
+            elif selected_menu == 4:
                 VigènereCipherDecrypt()
-            elif(selected_menu == 0):
+            elif selected_menu == 0:
                 exit()
             else:
                 print("Kamu memilih menu yang salah!")
                 back_to_menu()
-        except(ValueError):
+        except ValueError:
             print("Kamu memilih menu yang salah!")
             back_to_menu()
-    except(KeyboardInterrupt):
+    except KeyboardInterrupt:
         exit()
 
 if __name__ == "__main__":
